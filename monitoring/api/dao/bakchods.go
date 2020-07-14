@@ -14,12 +14,49 @@ type Bakchod struct {
 	Modifiers JSONString `json:"modifiers"`
 }
 
-// GetAllBakchods from the database
+// GetAllBakchods retrives all Bakchods from the database
 func GetAllBakchods() []Bakchod {
 
 	rows, err := Db.Query("SELECT id, username, first_name, lastseen, rokda, history, modifiers FROM bakchods;")
 	if err != nil {
 		log.Panicf("Panic during GetAllBakchods! %v", err)
+	}
+
+	var bakchods []Bakchod
+
+	for rows.Next() {
+
+		var bakchod Bakchod
+
+		err = rows.Scan(
+			&bakchod.Id,
+			&bakchod.Username,
+			&bakchod.FirstName,
+			&bakchod.Lastseen,
+			&bakchod.Rokda,
+			&bakchod.History,
+			&bakchod.Modifiers,
+		)
+
+		if err != nil {
+			log.Panicf("Panic! %v", err)
+		}
+
+		bakchods = append(bakchods, bakchod)
+
+	}
+
+	rows.Close()
+
+	return bakchods
+}
+
+// GetBakchodByID retrives a Bakchod from the database based on the ID
+func GetBakchodByID(bakchodID string) []Bakchod {
+
+	rows, err := Db.Query(`SELECT id, username, first_name, lastseen, rokda, history, modifiers FROM bakchods WHERE id = ?;`, bakchodID)
+	if err != nil {
+		log.Panicf("Panic during GetBakchodByID! %v", err)
 	}
 
 	var bakchods []Bakchod
