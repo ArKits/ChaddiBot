@@ -5,11 +5,13 @@ import (
 	"net/http"
 )
 
+// Version encapsulates the version of the application
 type Version struct {
 	Name    string `json:"name"`
 	Version string `json:"version"`
 }
 
+// VersionController handles the /version query
 func VersionController(w http.ResponseWriter, r *http.Request) {
 	v := Version{
 		Name:    "chaddi-api",
