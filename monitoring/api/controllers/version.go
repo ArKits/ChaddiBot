@@ -1,4 +1,4 @@
-package domain
+package controllers
 
 import (
 	"encoding/json"
