@@ -1,0 +1,6 @@
+server:
+    port: 4204
+
+chaddi:
+    db:
+        path: "./chaddi.db"
