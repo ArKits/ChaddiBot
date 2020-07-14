@@ -7,4 +7,5 @@ require (
 	github.com/gorilla/mux v1.7.4
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/spf13/viper v1.7.0
+	gopkg.in/guregu/null.v4 v4.0.0
 )

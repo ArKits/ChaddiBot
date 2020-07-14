@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
@@ -28,34 +27,6 @@ func InitializeDb() {
 
 	Db = conn
 
-}
-
-// NullString is an alias for sql.NullString data type
-type NullString sql.NullString
-
-// Scan implements the Scanner interface for NullString
-func (ns *NullString) Scan(value interface{}) error {
-	var s sql.NullString
-	if err := s.Scan(value); err != nil {
-		return err
-	}
-
-	// if nil then make Valid false
-	if reflect.TypeOf(value) == nil {
-		*ns = NullString{s.String, false}
-	} else {
-		*ns = NullString{s.String, true}
-	}
-
-	return nil
-}
-
-// MarshalJSON for NullString
-func (ns *NullString) MarshalJSON() ([]byte, error) {
-	if !ns.Valid {
-		return []byte("null"), nil
-	}
-	return json.Marshal(ns.String)
 }
 
 // JSONString is a JSON object in a string representation

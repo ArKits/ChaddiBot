@@ -11,6 +11,8 @@ import (
 
 func GetAllBakchodsController(w http.ResponseWriter, r *http.Request) {
 
+	log.Printf("GetAllBakchodsController")
+
 	allBakchods := dao.GetAllBakchods()
 
 	w.Header().Set("Content-Type", "application/json")
