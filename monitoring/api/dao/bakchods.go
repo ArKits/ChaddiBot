@@ -54,7 +54,7 @@ func GetAllBakchods() []Bakchod {
 }
 
 // GetBakchodByID retrives a Bakchod from the database based on the ID
-func GetBakchodByID(bakchodID string) Bakchod {
+func GetBakchodByID(bakchodID string) (Bakchod, error) {
 
 	var bakchod Bakchod
 
@@ -68,9 +68,6 @@ func GetBakchodByID(bakchodID string) Bakchod {
 		&bakchod.History,
 		&bakchod.Modifiers,
 	)
-	if err != nil {
-		log.Panicf("Panic during GetBakchodByID! %v", err)
-	}
 
-	return bakchod
+	return bakchod, err
 }
