@@ -1,4 +1,4 @@
-# Monitoring Chaddi
+# Chaddi Metrics
 
 ## Intro
 
